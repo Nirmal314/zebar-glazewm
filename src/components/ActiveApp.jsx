@@ -2,8 +2,14 @@ const ActiveApp = ({ output }) => {
     const style = {
     }
 
-    const onClick = () => {
-    }
+    // const onClick = () => {
+    // }
+
+    // const handleAppClick = (workspaceId) => {
+    //     if (output.glazewm && output.glazewm.runCommand) {
+    //         output.glazewm.runCommand(`focus --direction left`);
+    //     }
+    // };
 
     function getAppIcon(appId) {
         if (/spotify/i.test(appId)) {
