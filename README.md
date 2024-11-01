@@ -1,7 +1,11 @@
 <div align="center">
 
-# my config
+# my config by aria
+- add active app
+- preview
 ![alt text](./image/1.png)
+
+- setting
 ![alt text](./image/2.png)
 
 # Quiet Velvet 🌸
