@@ -1,14 +1,22 @@
+# My Config by Aria
+
+- 🎯 [Dotfiles Windows by me](https://github.com/ariafatah0711/win_aria)
+
+---
+
+## ✨ Features
+- Active app highlight
+- Taskbar preview
+
+### Preview
+![Preview](./image/1.png)
+
+### Settings
+![Settings](./image/2.png)
+
+---
+
 <div align="center">
-
-# my config by aria
-- [dotfiles windows by me: https://github.com/ariafatah0711/win_aria](https://github.com/ariafatah0711/win_aria)
-
-- add active app
-- preview
-![alt text](./image/1.png)
-
-- setting
-![alt text](./image/2.png)
 
 # Quiet Velvet 🌸
 
