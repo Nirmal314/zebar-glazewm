@@ -1,9 +1,7 @@
 <div align="center">
 
 # my config by aria
-## MY Dot Files For Windows
-- [https://github.com/ariafatah0711/win_aria](https://github.com/ariafatah0711/win_aria)
-![Watch the video](./preview.png)
+- [dotfiles windows by me: https://github.com/ariafatah0711/win_aria](https://github.com/ariafatah0711/win_aria)
 
 - add active app
 - preview
