@@ -1,6 +1,10 @@
 <div align="center">
 
 # my config by aria
+## MY Dot Files For Windows
+- [https://github.com/ariafatah0711/win_aria](https://github.com/ariafatah0711/win_aria)
+![Watch the video](./preview.png)
+
 - add active app
 - preview
 ![alt text](./image/1.png)
@@ -24,10 +28,10 @@ If you need assistance, please send me a message on Discord. My ID is `0h37`.
 ## Installation 📂
 
 Navigate to your `~/.glzr/zebar/` directory and clone this repository:
-- ```git clone https://github.com/LeoBessin/quiet-velvet```
+- ```git clone https://github.com/ariafatah0711/zebar-glazewm```
 
 Navigate to the repository and install the dependencies:
-- ```cd ./quiet-velvet/```
+- ```cd ./zebar-glazewm/```
 - ```npm install```
 
 - Create a `config.js` file in the `./src/` folder. You can configure it later using the [configuration](#configuration-%EF%B8%8F) section.
@@ -37,7 +41,7 @@ Build the project using the following command:
 
 After completing these steps, you need to reload Zebar's configuration.
 
-You should see `quiet-velvet/main` in the Widget configurations!
+You should see `zebar-glazewm/main` in the Widget configurations!
 
 ![zebar-update](https://raw.githubusercontent.com/LeoBessin/files/refs/heads/master/zebar/reload_zebar.png)
 
@@ -46,7 +50,7 @@ You should see `quiet-velvet/main` in the Widget configurations!
 
 ## Configuration ⚙️
 
-You need to create a `config.js` file in the `quiet-velvet/src/` directory.
+You need to create a `config.js` file in the `zebar-glazewm/src/` directory.
 Enter the following key/value pairs in the file.
 These keys are not required for the build, so you can leave them as shown in the example.
 
