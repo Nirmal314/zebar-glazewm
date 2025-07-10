@@ -5,62 +5,70 @@
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 
 :root {
-    --main-color: rgba(122, 80, 229, 0.95);
-    --background-color: linear-gradient(rgba(0, 0, 0, 0.90), rgba(14, 2, 20, 0.85));
-    --font-color: rgba(255, 255, 255, 0.9);
-    user-select: none;
+  /* Darker color palette with green-blue accents */
+  --main-color: #0096c7; /* Darker blue-green */
+  --secondary-color: #0096c7; /* Match main-color */
+  --accent-color: rgba(0, 150, 199, 0.9); /* Match main-color for accent */
+  --background-color: #001233; /* Much darker slate/navy */
+  --surface-color: rgba(0, 150, 199, 0.1); /* Slightly darker main-color tint */
+  --surface-hover: rgba(0, 150, 199, 0.22); /* Stronger main-color tint */
+  --font-color: #b6e0fe; /* Muted light blue */
+  --font-secondary: rgba(148, 163, 184, 0.8); /* Slate-400 */
+  --success-color: rgba(34, 197, 94, 0.9); /* Green-500 */
+  --warning-color: rgba(251, 191, 36, 0.9); /* Amber-400 */
+  --error-color: rgba(239, 68, 68, 0.9); /* Red-500 */
+  user-select: none;
 }
 
 ::placeholder {
-    color: rgb(255 255 255 / 60%);
+  color: var(--font-secondary);
 }
 
 i {
-    color: var(--main-color);
-    margin-right: 2px;
+  color: var(--main-color);
+  margin-right: 2px;
 }
 
 body {
-    color: var(--font-color);
-    font-family: "FiraCode Nerd Font", monospace;
-    font-size: 12px;
-    overflow: hidden;
+  color: var(--font-color);
+  font-family: "FiraCode Nerd Font", monospace;
+  font-size: 12px;
+  overflow: hidden;
 }
 
 html,
 body,
 #root {
-    height: 100%;
+  height: 100%;
 }
 
 #root {
-    background: transparent;
+  background: transparent;
 }
 
-
 .app {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    height: 100%;
-    /* padding app */
-    padding: 2px 0.5vw;
-    white-space: nowrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  height: 100%;
+  /* padding app */
+  padding: 2px 0.5vw;
+  white-space: nowrap;
 }
 
 .left,
 .center,
 .right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .center {
-    justify-self: center;
+  justify-self: center;
 }
 
 .right {
-    justify-self: end;
+  justify-self: end;
 }
 
 .keyboard,
@@ -71,147 +79,160 @@ body,
 .memory,
 .cpu,
 .battery {
-    margin-right: 20px !important;
-    display: flex;
-    align-items: center;
-    color: var(--font-color);
+  margin-right: 10px !important;
+  /* display: flex; */
+  /* align-items: center; */
+  color: var(--font-color);
 }
 
 .logo {
-    gap: 0.25vw;
-    margin-right: 10px !important;
+  gap: 0.25vw;
+  margin-right: 10px !important;
 }
 
 .workspaces {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .workspace {
-    background: rgb(255 255 255 / 5%);
-    margin-right: 4px;
-    padding: 3px 8px;
-    color: var(--font-color);
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.3s, transform 0.3s;
+  background: var(--surface-color);
+  margin-right: 4px;
+  padding: 3px 8px;
+  color: var(--font-color);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease, transform 0.2s ease;
 
-    &.displayed {
-        background: rgb(255 255 255 / 15%) !important;
-    }
+  &.displayed {
+    background: var(--surface-hover) !important;
+    border: 1px solid var(--secondary-color);
+  }
 
-    &.focused,
-    &:hover {
-        background: var(--main-color);
-        transform: scale(0.9);
-    }
+  &.focused,
+  &:hover {
+    background: var(--main-color);
+    transform: translateY(-1px);
+  }
 }
 
 .binding-mode,
 .tiling-direction {
-    background: rgb(255 255 255 / 15%);
-    color: var(--font-color);
-    border-radius: 2px;
-    line-height: 1;
-    padding: 4px 8px;
-    border: 0;
-    cursor: pointer;
+  background: var(--surface-color);
+  color: var(--font-color);
+  border-radius: 6px;
+  line-height: 1;
+  padding: 4px 8px;
+  border: 1px solid var(--secondary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .binding-mode {
-    margin-right: 4px;
+  margin-right: 4px;
 }
 
 .cpu .high-usage {
-    color: #900029;
+  color: var(--error-color);
 }
 
 .battery {
-    position: relative;
+  position: relative;
 }
 
 .battery .charging-icon {
-    position: absolute;
-    font-size: 7px;
-    left: -8px;
-    top: 3px;
+  position: absolute;
+  font-size: 7px;
+  left: -8px;
+  top: 3px;
+  color: var(--success-color);
 }
 
 .box {
-    background: var(--background-color);
-    border: 2px solid var(--main-color);
-    padding: 0.5em 1em;
-    border-radius: 1em;
-    display: flex;
-    align-items: center;
-    backdrop-filter: invert(1);
-    transition: all 0.3s, transform 0.3s;
+  background: var(--background-color);
+  border: 2px solid var(--main-color);
+  padding: 0.5em 1em;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease, transform 0.2s ease;
 }
 
 .active-app {
-    padding-left: 0.5em;
+  padding-left: 0.5em;
 }
 
 .active-app-icons .nf {
-    color: var(--font-color) !important;
-    margin-right: 0.5em;
+  color: var(--font-color) !important;
+  margin-right: 0.5em;
+}
+
+.app-icon {
+  font-size: 10pt;
 }
 
 .network-item {
-    display: flex;
-    align-items: center;
-    font-size: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 10px;
 }
 
 .network {
-    gap: 0.5em;
+  gap: 0.5em;
 }
 
 .shortcut {
-    background: var(--background-color);
-    padding: 5px 8px;
-    color: var(--font-color);
-    border: 2px solid var(--main-color) !important;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.3s, transform 0.3s;
+  background: var(--background-color);
+  padding: 5px 8px;
+  color: var(--font-color);
+  border: 2px solid var(--main-color) !important;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease, transform 0.2s ease;
 
-    &.displayed {
-        background: rgb(255 255 255 / 15%);
-    }
+  &.displayed {
+    background: var(--surface-hover);
+    border-color: var(--secondary-color) !important;
+  }
 
-    &.focused,
-    &:hover {
-        background: var(--main-color);
-        transform: scale(0.9);
-    }
+  &.focused,
+  &:hover {
+    background: var(--main-color);
+    transform: translateY(-1px);
+  }
 }
 
 .shortcut .nf {
-    color: var(--font-color);
+  color: var(--font-color);
 }
 
 .clean-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--font-color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--font-color);
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--main-color);
+  }
 }
 
 .settings {
-    background: rgb(255 255 255 / 15%);
-    margin-right: 4px;
-    padding: 3px 8px;
-    color: var(--font-color);
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.3s, transform 0.3s;
+  background: var(--surface-color);
+  margin-right: 4px;
+  padding: 3px 8px;
+  color: var(--font-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease, transform 0.2s ease;
 
-    &.focused,
-    &:hover {
-        background: var(--main-color);
-        transform: scale(0.9);
-    }
+  &.focused,
+  &:hover {
+    background: var(--main-color);
+    transform: translateY(-1px);
+  }
 }
