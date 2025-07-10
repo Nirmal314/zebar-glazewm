@@ -78,16 +78,17 @@ body,
 .network,
 .memory,
 .cpu,
-.battery {
-  margin-right: 10px !important;
-  /* display: flex; */
-  /* align-items: center; */
+.battery,
+.weather,
+.settings,
+.volume-control {
+  margin-right: 8px !important; /* Reduced from 10px for compactness */
   color: var(--font-color);
 }
 
 .logo {
   gap: 0.25vw;
-  margin-right: 10px !important;
+  margin-right: 15px !important;
 }
 
 .workspaces {
@@ -104,9 +105,8 @@ body,
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease, transform 0.2s ease;
-
   &.displayed {
-    background: var(--surface-hover) !important;
+    background: var(--surface-hover);
     border: 1px solid var(--secondary-color);
   }
 
@@ -173,14 +173,50 @@ body,
   font-size: 10pt;
 }
 
+.network {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.network span {
+  margin-right: 0.5em;
+  font-size: 10pt;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.volume-slider {
+  width: 80px;
+  margin: 0 0.2em;
+  accent-color: var(--main-color);
+  background: var(--surface-color);
+  border-radius: 4px;
+  height: 4px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  background: var(--main-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 4px rgba(0, 150, 199, 0.3), 0 0 8px rgba(0, 150, 199, 0.2); /* Neon glow */
+}
+
 .network-item {
   display: flex;
   align-items: center;
   font-size: 10px;
-}
-
-.network {
-  gap: 0.5em;
 }
 
 .shortcut {

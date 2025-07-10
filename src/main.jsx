@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import * as zebar from "zebar";
 import SpotifyWidget from "./components/SpotifyWidget.jsx";
@@ -18,17 +18,17 @@ const providers = zebar.createProviderGroup({
   memory: { type: "memory" },
   weather: { type: "weather" },
   host: { type: "host" },
+  network: { type: "network" },
+  audio: { type: "audio" },
 });
 
 createRoot(document.getElementById("root")).render(<App />);
 
 function App() {
   const [output, setOutput] = useState(providers.outputMap);
-  const [showSpotifyWidget, setShowSpotifyWidget] = useState(true);
   const [showGoogleSearch, setShowGoogleSearch] = useState(true);
   const [showShortcuts, setShowShortcuts] = useState(true);
-  const [ShowActiveApp, setShowActiveApp] = useState(true);
-  const [dateFormat, setDateFormat] = useState("HH:mm");
+  const [showActiveApp, setShowActiveApp] = useState(true);
 
   useEffect(() => {
     providers.onOutput(() => setOutput(providers.outputMap));
@@ -75,8 +75,9 @@ function App() {
     }
   }
 
-  // debug
-  console.log(output.glazewm);
+  function formatNetworkSpeed(speed) {
+    return (speed / 1000000).toFixed(2); // Convert bytes/s to Mbps
+  }
 
   return (
     <div className="app">
@@ -86,7 +87,7 @@ function App() {
             {moment(output.date?.now).format("ddd DD MMM hh:mm A")}
           </span>
         </div>
-        {ShowActiveApp &&
+        {showActiveApp &&
         output.glazewm &&
         output.glazewm.focusedWorkspace &&
         output.glazewm.focusedWorkspace.children.length > 0 ? (
@@ -102,7 +103,6 @@ function App() {
         <div className="box">
           <div className="logo">
             <i className="nf nf-custom-windows"></i>
-            {/* {output.host?.hostname} | {output.host?.friendlyOsVersion} */}
             {output.host?.hostname} |
           </div>
           {output.glazewm && (
@@ -175,7 +175,6 @@ function App() {
 
           <Settings
             widgetObj={[
-              { name: "Spotify", changeState: setShowSpotifyWidget },
               { name: "Google", changeState: setShowGoogleSearch },
               { name: "Shortcuts", changeState: setShowShortcuts },
               { name: "App", changeState: setShowActiveApp },
@@ -183,6 +182,23 @@ function App() {
             output={output}
             additionalContent={
               <>
+                {/* network */}
+                {output.network && (
+                  <div className="network">
+                    <span title="Download Speed">
+                      ↓{" "}
+                      {formatNetworkSpeed(
+                        output.network.traffic.received.bytes
+                      )}{" "}
+                      ↑{" "}
+                      {formatNetworkSpeed(
+                        output.network.traffic.transmitted.bytes
+                      )}{" "}
+                      Mbps
+                    </span>
+                  </div>
+                )}
+
                 {/* memory */}
                 {output.memory && (
                   <button
@@ -205,8 +221,6 @@ function App() {
                     }
                   >
                     <i className="nf nf-oct-cpu"></i>
-
-                    {/* Change the text color if the CPU usage is high. */}
                     <span className={output.cpu.usage > 85 ? "high-usage" : ""}>
                       {Math.round(output.cpu.usage)}%
                     </span>
@@ -216,7 +230,6 @@ function App() {
                 {/* battery */}
                 {output.battery && (
                   <div className="battery">
-                    {/* Show icon for whether battery is charging. */}
                     {output.battery.isCharging && (
                       <i className="nf nf-md-power_plug charging-icon"></i>
                     )}
@@ -230,6 +243,25 @@ function App() {
                   <div className="weather">
                     {getWeatherIcon(output.weather)}
                     {Math.round(output.weather.celsiusTemp)}°C
+                  </div>
+                )}
+
+                {/* volume */}
+                {output.audio?.defaultPlaybackDevice && (
+                  <div className="volume-control">
+                    <i className="nf nf-md-volume_high"></i>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      step="2"
+                      value={output.audio.defaultPlaybackDevice.volume}
+                      onChange={(e) =>
+                        output.audio.setVolume(e.target.valueAsNumber)
+                      }
+                      className="volume-slider"
+                    />
+                    <span>{output.audio.defaultPlaybackDevice.volume}%</span>
                   </div>
                 )}
               </>
