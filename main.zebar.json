@@ -3,9 +3,16 @@
   "htmlPath": "./dist/index.html",
   "zOrder": "normal",
   "shownInTaskbar": false,
-  "focused": true,
+  "focused": false,
   "resizable": false,
   "transparent": true,
+  "caching": {
+    "defaultDuration": 604800,
+    "rules": []
+  },
+  "privileges": {
+    "shellCommands": []
+  },
   "presets": [
     {
       "name": "default",
@@ -16,6 +23,11 @@
       "height": "40px",
       "monitorSelection": {
         "type": "primary"
+      },
+      "dockToEdge": {
+        "enabled": false,
+        "edge": null,
+        "windowMargin": "0px"
       }
     }
   ]

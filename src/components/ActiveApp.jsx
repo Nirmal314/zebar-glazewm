@@ -21,10 +21,11 @@ const ActiveApp = ({ output }) => {
       /brave/i.test(appId)
     ) {
       return <i className="nf nf-fa-chrome"></i>;
-    } else if (/code|vscode|visual studio/i.test(appId)) {
+    } else if (
+      /code|vscode|visual studio/i.test(appId) ||
+      /cursor/i.test(appId)
+    ) {
       return <i className="nf nf-dev-visualstudio"></i>;
-    } else if (/cursor/i.test(appId)) {
-      return <i className="nf nf-md-cursor_default_outline"></i>;
     } else if (/obs/i.test(appId)) {
       return <i className="nf nf-fa-video_camera"></i>;
     } else if (/zoom/i.test(appId)) {
