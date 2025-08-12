@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import * as zebar from "zebar";
-import SpotifyWidget from "./components/SpotifyWidget.jsx";
-import GoogleSearch from "./components/GoogleSearch.jsx";
 import Settings from "./components/Settings.jsx";
-import Shortcut from "./components/Shortcut";
 import ActiveApp from "./components/ActiveApp.jsx";
 import config from "./config.js";
 import moment from "moment";
@@ -79,32 +76,29 @@ function App() {
     return (speed / 1000000).toFixed(2); // Convert bytes/s to Mbps
   }
 
+  {
+    /* {output.glazewm && (
+    <div className="workspaces">
+      <Shortcut
+        commandRunner={output.glazewm.runCommand}
+        commands={[`shell-exec wt`]}
+        iconClass="nf-cod-terminal_powershell"
+        name=""
+      />
+      <Shortcut
+        commandRunner={output.glazewm.runCommand}
+        commands={[`shell-exec wt -d . wsl -d archlinux`]}
+        iconClass="nf-md-arch"
+        name=""
+      />
+    </div>
+  )} */
+  }
+
   return (
     <div className="app">
       <div className="left">
-        <div className="box">
-          <span className="date">
-            {moment(output.date?.now).format("ddd DD MMM hh:mm A")}
-          </span>
-        </div>
-        {showActiveApp &&
-        output.glazewm &&
-        output.glazewm.focusedWorkspace &&
-        output.glazewm.focusedWorkspace.children.length > 0 ? (
-          <div className="box" style={{ marginLeft: "5px" }}>
-            <div>
-              <ActiveApp output={output} />
-            </div>
-          </div>
-        ) : null}
-      </div>
-
-      <div className="center">
-        <div className="box">
-          <div className="logo">
-            <i className="nf nf-custom-windows"></i>
-            {output.host?.hostname} |
-          </div>
+        <div className="light-box">
           {output.glazewm && (
             <div className="workspaces">
               {output.glazewm.currentWorkspaces.map((workspace) => (
@@ -124,34 +118,28 @@ function App() {
               ))}
             </div>
           )}
+          {/* <OfficeTime /> */}
         </div>
+      </div>
 
-        {showShortcuts && output.glazewm ? (
-          <div className="workspaces">
-            <Shortcut
-              commandRunner={output.glazewm.runCommand}
-              commands={[`shell-exec wt`]}
-              iconClass="nf-cod-terminal_powershell"
-              name=""
-            />
-            <Shortcut
-              commandRunner={output.glazewm.runCommand}
-              commands={[`shell-exec wt -d . wsl -d archlinux`]}
-              iconClass="nf-md-arch"
-              name=""
-            />
+      <div className="center">
+        {showActiveApp &&
+        output.glazewm &&
+        output.glazewm.focusedWorkspace &&
+        output.glazewm.focusedWorkspace.children.length > 0 ? (
+          <div className="light-box mr-5">
+            <ActiveApp output={output} />
           </div>
         ) : null}
+        <div className="light-box">
+          {output?.glazewm?.focusedContainer?.title ||
+            `${output?.host?.osName} | ${output?.host?.hostname}`}{" "}
+          {"  "}
+        </div>
       </div>
 
       <div className="right">
-        {showGoogleSearch && output.glazewm ? (
-          <GoogleSearch
-            commandRunner={output.glazewm.runCommand}
-            explorerPath={config.explorerPath}
-          />
-        ) : null}
-        <div className="box">
+        <div className="light-box mr-5">
           {output.glazewm && (
             <>
               {output.glazewm.bindingModes.map((bindingMode) => (
@@ -174,11 +162,7 @@ function App() {
           )}
 
           <Settings
-            widgetObj={[
-              { name: "Google", changeState: setShowGoogleSearch },
-              { name: "Shortcuts", changeState: setShowShortcuts },
-              { name: "App", changeState: setShowActiveApp },
-            ]}
+            widgetObj={[]}
             output={output}
             additionalContent={
               <>
@@ -250,23 +234,17 @@ function App() {
                 {output.audio?.defaultPlaybackDevice && (
                   <div className="volume-control">
                     <i className="nf nf-md-volume_high"></i>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      step="2"
-                      value={output.audio.defaultPlaybackDevice.volume}
-                      onChange={(e) =>
-                        output.audio.setVolume(e.target.valueAsNumber)
-                      }
-                      className="volume-slider"
-                    />
                     <span>{output.audio.defaultPlaybackDevice.volume}%</span>
                   </div>
                 )}
               </>
             }
           />
+        </div>
+        <div className="light-box">
+          <span className="date">
+            {moment(output.date?.now).format("ddd DD MMM hh:mm A")}
+          </span>
         </div>
       </div>
     </div>
