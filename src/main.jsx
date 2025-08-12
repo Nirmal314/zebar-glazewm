@@ -118,7 +118,7 @@ function App() {
         </div>
       </div>
 
-      <div className="center">
+      <div className="center mr-5">
         {output.glazewm &&
         output.glazewm.focusedWorkspace &&
         output.glazewm.focusedWorkspace.children.length > 0 ? (
