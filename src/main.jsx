@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import * as zebar from "zebar";
 import Settings from "./components/Settings.jsx";
 import ActiveApp from "./components/ActiveApp.jsx";
+import config from "./config.js";
 import moment from "moment";
 
 const providers = zebar.createProviderGroup({
@@ -22,6 +23,9 @@ createRoot(document.getElementById("root")).render(<App />);
 
 function App() {
   const [output, setOutput] = useState(providers.outputMap);
+  const [showGoogleSearch, setShowGoogleSearch] = useState(true);
+  const [showShortcuts, setShowShortcuts] = useState(true);
+  const [showActiveApp, setShowActiveApp] = useState(true);
 
   useEffect(() => {
     providers.onOutput(() => setOutput(providers.outputMap));
@@ -94,11 +98,6 @@ function App() {
   return (
     <div className="app">
       <div className="left">
-        <div className="light-box mr-5">
-          <span className="date">
-            {moment(output.date?.now).format("ddd DD MMM hh:mm A")}
-          </span>
-        </div>
         <div className="light-box">
           {output.glazewm && (
             <div className="workspaces">
@@ -124,6 +123,14 @@ function App() {
       </div>
 
       <div className="center">
+        {showActiveApp &&
+        output.glazewm &&
+        output.glazewm.focusedWorkspace &&
+        output.glazewm.focusedWorkspace.children.length > 0 ? (
+          <div className="light-box mr-5">
+            <ActiveApp output={output} />
+          </div>
+        ) : null}
         <div className="light-box">
           {output?.glazewm?.focusedContainer?.title ||
             `${output?.host?.osName} | ${output?.host?.hostname}`}{" "}
@@ -132,13 +139,6 @@ function App() {
       </div>
 
       <div className="right">
-        {output.glazewm &&
-        output.glazewm.focusedWorkspace &&
-        output.glazewm.focusedWorkspace.children.length > 0 ? (
-          <div className="light-box mr-5">
-            <ActiveApp output={output} />
-          </div>
-        ) : null}
         <div className="light-box mr-5">
           {output.glazewm && (
             <>
@@ -240,6 +240,11 @@ function App() {
               </>
             }
           />
+        </div>
+        <div className="light-box">
+          <span className="date">
+            {moment(output.date?.now).format("ddd DD MMM hh:mm A")}
+          </span>
         </div>
       </div>
     </div>
