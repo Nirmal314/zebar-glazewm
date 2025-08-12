@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import * as zebar from "zebar";
 import Settings from "./components/Settings.jsx";
 import ActiveApp from "./components/ActiveApp.jsx";
-import config from "./config.js";
 import moment from "moment";
 
 const providers = zebar.createProviderGroup({
@@ -23,9 +22,6 @@ createRoot(document.getElementById("root")).render(<App />);
 
 function App() {
   const [output, setOutput] = useState(providers.outputMap);
-  const [showGoogleSearch, setShowGoogleSearch] = useState(true);
-  const [showShortcuts, setShowShortcuts] = useState(true);
-  const [showActiveApp, setShowActiveApp] = useState(true);
 
   useEffect(() => {
     providers.onOutput(() => setOutput(providers.outputMap));
@@ -123,8 +119,7 @@ function App() {
       </div>
 
       <div className="center">
-        {showActiveApp &&
-        output.glazewm &&
+        {output.glazewm &&
         output.glazewm.focusedWorkspace &&
         output.glazewm.focusedWorkspace.children.length > 0 ? (
           <div className="light-box mr-5">
