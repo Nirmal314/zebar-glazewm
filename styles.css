@@ -320,5 +320,9 @@ body,
 /* Tailwind */
 
 .mr-5 {
-  margin-right: 10px;
+  margin-right: 10px !important;
+}
+
+.mr-0 {
+  margin-right: 0 !important;
 }

@@ -144,11 +144,12 @@ function App() {
               ))}
 
               <button
-                className={`tiling-direction nf ${
+                className={`tiling-direction mr-0 nf ${
                   output.glazewm.tilingDirection === "horizontal"
                     ? "nf-md-swap_horizontal"
                     : "nf-md-swap_vertical"
                 }`}
+                style={{ padding: ".4em .8em" }}
                 onClick={() =>
                   output.glazewm.runCommand("toggle-tiling-direction")
                 }
@@ -156,85 +157,70 @@ function App() {
             </>
           )}
 
-          <Settings
-            widgetObj={[]}
-            output={output}
-            additionalContent={
-              <>
-                {/* network */}
-                {output.network && (
-                  <div className="network">
-                    <span title="Download Speed">
-                      ↓{" "}
-                      {formatNetworkSpeed(
-                        output.network.traffic.received.bytes
-                      )}{" "}
-                      ↑{" "}
-                      {formatNetworkSpeed(
-                        output.network.traffic.transmitted.bytes
-                      )}{" "}
-                      Mbps
-                    </span>
-                  </div>
-                )}
+          <div className="light-box">
+            {/* network */}
+            {output.network && (
+              <div className="network">
+                <span title="Download Speed">
+                  ↓ {formatNetworkSpeed(output.network.traffic.received.bytes)}{" "}
+                  ↑{" "}
+                  {formatNetworkSpeed(output.network.traffic.transmitted.bytes)}{" "}
+                  Mbps
+                </span>
+              </div>
+            )}
 
-                {/* memory */}
-                {output.memory && (
-                  <button
-                    className="memory clean-button"
-                    onClick={() =>
-                      output.glazewm.runCommand("shell-exec taskmgr")
-                    }
-                  >
-                    <i className="nf nf-fae-chip"></i>
-                    {Math.round(output.memory.usage)}%
-                  </button>
-                )}
+            {/* memory */}
+            {output.memory && (
+              <button
+                className="memory clean-button"
+                onClick={() => output.glazewm.runCommand("shell-exec taskmgr")}
+              >
+                <i className="nf nf-fae-chip"></i>
+                {Math.round(output.memory.usage)}%
+              </button>
+            )}
 
-                {/* cpu */}
-                {output.cpu && (
-                  <button
-                    className="cpu clean-button"
-                    onClick={() =>
-                      output.glazewm.runCommand("shell-exec taskmgr")
-                    }
-                  >
-                    <i className="nf nf-oct-cpu"></i>
-                    <span className={output.cpu.usage > 85 ? "high-usage" : ""}>
-                      {Math.round(output.cpu.usage)}%
-                    </span>
-                  </button>
-                )}
+            {/* cpu */}
+            {output.cpu && (
+              <button
+                className="cpu clean-button"
+                onClick={() => output.glazewm.runCommand("shell-exec taskmgr")}
+              >
+                <i className="nf nf-oct-cpu"></i>
+                <span className={output.cpu.usage > 85 ? "high-usage" : ""}>
+                  {Math.round(output.cpu.usage)}%
+                </span>
+              </button>
+            )}
 
-                {/* battery */}
-                {output.battery && (
-                  <div className="battery">
-                    {output.battery.isCharging && (
-                      <i className="nf nf-md-power_plug charging-icon"></i>
-                    )}
-                    {getBatteryIcon(output.battery)}
-                    {Math.round(output.battery.chargePercent)}%
-                  </div>
+            {/* battery */}
+            {output.battery && (
+              <div className="battery">
+                {output.battery.isCharging && (
+                  <i className="nf nf-md-power_plug charging-icon"></i>
                 )}
+                {getBatteryIcon(output.battery)}
+                {Math.round(output.battery.chargePercent)}%
+              </div>
+            )}
 
-                {/* weather */}
-                {output.weather && (
-                  <div className="weather">
-                    {getWeatherIcon(output.weather)}
-                    {Math.round(output.weather.celsiusTemp)}°C
-                  </div>
-                )}
+            {/* weather */}
+            {output.weather && (
+              <div className="weather">
+                {getWeatherIcon(output.weather)}
+                {Math.round(output.weather.celsiusTemp)}°C
+              </div>
+            )}
 
-                {/* volume */}
-                {output.audio?.defaultPlaybackDevice && (
-                  <div className="volume-control">
-                    <i className="nf nf-md-volume_high"></i>
-                    <span>{output.audio.defaultPlaybackDevice.volume}%</span>
-                  </div>
-                )}
-              </>
-            }
-          />
+            {/* volume */}
+            {output.audio?.defaultPlaybackDevice && (
+              <div className="volume-control">
+                <i className="nf nf-md-volume_high"></i>
+                <span>{output.audio.defaultPlaybackDevice.volume}%</span>
+              </div>
+            )}
+          </div>
         </div>
         <div className="light-box">
           <span className="date">
